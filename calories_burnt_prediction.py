@@ -15,36 +15,35 @@ from sklearn.model_selection import train_test_split
 from xgboost import XGBRegressor
 from sklearn import metrics
 
-calories = pd.read_csv('calories.csv')
-exercise = pd.read_csv('exercise.csv')
+calories = pd.read_csv('calories.csv', encoding='utf-8', engine='python')
+exercise = pd.read_csv('exercise.csv', encoding='utf-8', engine='python')
 
-calories.head()
+print(calories.head())
 
-exercise.head()
+print(exercise.head())
 
 # append calories column next to the exercises
 data = pd.concat([exercise, calories['Calories']], axis=1)
-data.head()
+print(data.head())
 
 # check number of rows and columns
-data.shape
+print(data.shape)
 
 # getting info about the data
-data.info()
+print(data.info())
 
 # getting missing values
-data.isnull().sum()
+print(data.isnull().sum())
 
 # statistical measures about the data
-data.describe()
+print(data.describe())
 
 # data visualization
-sns.set()
+print(sns.set())
 
-from sklearn.preprocessing import LabelEncoder
-le = LabelEncoder();
-data['Gender']= le.fit_transform(data['Gender'])
-data.head()
+
+#data.replace({"Gender":{'male':0, 'female':1}}, inplace=True)
+print(data.head())
 
 sns.countplot(data.Gender)
 
@@ -73,13 +72,7 @@ sns.heatmap(correlation, cbar=True, square=True, fmt='.1f', annot=True, cmap='Bl
 X = data.drop(columns=['User_ID','Calories'], axis=1)
 y = data['Calories']
 
-X
-
-y
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=2)
-
-X_train.shape, X_test.shape, y_train.shape, y_test.shape
 
 # XGBoost regressor
 model = XGBRegressor()
@@ -90,21 +83,20 @@ y_preds = model.predict(X_test)
 
 # mean absolute error
 mae = metrics.mean_absolute_error(y_test, y_preds)
-mae
+print(mae)
 
 r2 = metrics.r2_score(y_test, y_preds)
-r2
+print(r2)
+print(X_test)
 
 import pickle
 
 pickle.dump(model, open("XGB_model.pkl","wb"))
-loaded_gs_model = pickle.load(open("XGB_model.pkl", "rb"))
-pickle_y_preds = loaded_gs_model.predict(X_test)
-metrics.r2_score(y_test, y_preds)
-
-import pickle
+loaded_gs_model = pickle.load(open("XGB_model.sav", "rb"))
+pickle_y_preds = loaded_gs_model.predict(pd.DataFrame(columns=['Gender', 'Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp'], data=[[1,68,190,94,29,105,40.8]]))
+print(pickle_y_preds)
 
 pickle.dump(model, open("XGB_model.sav","wb"))
 loaded_gs_model = pickle.load(open("XGB_model.sav", "rb"))
-pickle_y_preds = loaded_gs_model.predict(X_test)
-metrics.r2_score(y_test, y_preds)
+pickle_y_preds = loaded_gs_model.predict(pd.DataFrame(columns=['Gender', 'Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp'], data=[[1,68,190,94,29,105,40.8]]))
+print(pickle_y_preds)
