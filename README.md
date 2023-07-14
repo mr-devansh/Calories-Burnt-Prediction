@@ -17,4 +17,4 @@ Predictions using XGBRegressor which is a really powerful regression ML model
 next we evaluated the model using the mean absolute error, r2 score
 and finally saved the model for the future use using the pickle module of python
 
-The features to be added are deployment on a web server along with a UI for evaluating reallife values entered by users! 
+The features to be added are deployment on a web server along with a UI for evaluating real-life values entered by users! 
