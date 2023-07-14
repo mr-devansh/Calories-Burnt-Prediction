@@ -13,7 +13,7 @@ response = requests.get(github_url)
 pickle_data = response.content
 
 # Load the pickle model
-loaded_XGB_model = pickle.load(pickle_data)
+loaded_XGB_model = pickle.load(open(pickle_data),'rb')
 #loaded_XGB_model = pickle.load(open('https://github.com/mr-devansh/Calories-Burnt-Prediction/blob/main/XGB_model.pkl', 'rb'))
 
 def predict(input_data):
