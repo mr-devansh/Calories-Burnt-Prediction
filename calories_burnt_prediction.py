@@ -101,3 +101,10 @@ pickle.dump(model, open("XGB_model.pkl","wb"))
 loaded_gs_model = pickle.load(open("XGB_model.pkl", "rb"))
 pickle_y_preds = loaded_gs_model.predict(X_test)
 metrics.r2_score(y_test, y_preds)
+
+import pickle
+
+pickle.dump(model, open("XGB_model.sav","wb"))
+loaded_gs_model = pickle.load(open("XGB_model.sav", "rb"))
+pickle_y_preds = loaded_gs_model.predict(X_test)
+metrics.r2_score(y_test, y_preds)
