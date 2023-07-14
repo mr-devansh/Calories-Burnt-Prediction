@@ -2,8 +2,19 @@ import numpy as np
 import pickle
 import pandas as pd
 import streamlit as st
+import requests
+import pickle
 
-loaded_XGB_model = pickle.load(open('https://github.com/mr-devansh/Calories-Burnt-Prediction/blob/main/XGB_model.pkl', 'rb'))
+# GitHub URL of the pickle model file
+github_url = 'https://github.com/mr-devansh/Calories-Burnt-Prediction/blob/main/XGB_model.pkl'
+
+# Download the pickle model file
+response = requests.get(github_url)
+pickle_data = response.content
+
+# Load the pickle model
+loaded_XGB_model = pickle.loads(pickle_data)
+#loaded_XGB_model = pickle.load(open('https://github.com/mr-devansh/Calories-Burnt-Prediction/blob/main/XGB_model.pkl', 'rb'))
 
 def predict(input_data):
     data_as_array = np.asarray(input_data, dtype=np.float32)
