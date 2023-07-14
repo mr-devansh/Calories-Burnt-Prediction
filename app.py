@@ -6,7 +6,7 @@ import requests
 import pickle
 
 
-loaded_XGB_model = pickle.load(open('XGB_model.sav', 'rb'))
+loaded_XGB_model = pickle.load(open('XGB_model.pkl', 'rb'))
 
 def predict(input_data):
     data_as_array = np.asarray(input_data, dtype=np.float32)
