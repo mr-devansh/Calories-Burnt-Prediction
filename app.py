@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 import streamlit as st
 
-loaded_XGB_model = pickle.load(open('C:/Users/devu0/OneDrive/Documents/MACHINE LEARNING/PROJECTS/CALORIES BURNT PREDICTION/XGB_model.pkl', 'rb'))
+loaded_XGB_model = pickle.load(open('XGB_model.pkl', 'rb'))
 
 def predict(input_data):
     data_as_array = np.asarray(input_data, dtype=np.float32)
