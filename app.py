@@ -17,17 +17,17 @@ def predict(input_data):
 
 def main():
     st.title('Calories Burnt Prediction')
-    Gender = st.text_input('Your gender')
-    Age = st.text_input('Your age')
-    Height = st.text_input('Your height')
-    Weight = st.text_input('Your weight')
-    Duration = st.text_input('Your duration')
-    Heart_Rate = st.text_input('Your heart rate')
-    Body_Temp = st.text_input('Your body temperature')
+    Gender = st.text_input('Your gender (1: male, 0: female)')
+    Age = st.text_input('Your age (in years)')
+    Height = st.text_input('Your height (in cms)')
+    Weight = st.text_input('Your weight (in kgs)')
+    Duration = st.text_input('Your workout duration (in minutes)')
+    Heart_Rate = st.text_input('Your heart rate (in BPM)')
+    Body_Temp = st.text_input('Your body temperature (in celsius)')
 
     result = ''
 
-    if st.button('Calories'):
+    if st.button(' Calculate Calories'):
         input_data = [Gender, Age, Height, Weight, Duration, Heart_Rate, Body_Temp]
         try:
             result = predict([float(value) for value in input_data])
